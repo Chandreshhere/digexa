@@ -128,6 +128,15 @@
   text-align: center;
 }
 
+/* Carousel (hidden on desktop) */
+.team__carousel-wrapper {
+  position: relative;
+}
+
+.team__carousel-btn {
+  display: none;
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 1024px) {
@@ -171,13 +180,57 @@
     font-size: 30px;
   }
 
+  .team__carousel-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--green-accent);
+    color: var(--text-dark);
+    font-size: 20px;
+    font-weight: 700;
+    z-index: 5;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .team__carousel-btn--left {
+    left: 4px;
+  }
+
+  .team__carousel-btn--right {
+    right: 4px;
+  }
+
+  .team__grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 16px;
+  }
+
+  .team__grid::-webkit-scrollbar {
+    display: none;
+  }
+
   .team__card {
-    min-width: 100%;
-    flex: 0 0 100%;
+    scroll-snap-align: start;
+    min-width: 260px;
+    flex: 0 0 75%;
+    height: auto;
   }
 
   .team__card-image {
-    height: 220px;
+    height: 200px;
   }
 }
 
@@ -187,18 +240,20 @@
   }
 
   .team__inner {
-    padding: 0 12px;
+    padding: 0 16px;
   }
 
   .team__title {
-    font-size: 26px;
+    font-size: 28px;
   }
 
   .team__card {
+    min-width: 240px;
+    flex: 0 0 80%;
     padding: 12px;
   }
 
   .team__card-image {
-    height: 200px;
+    height: 180px;
   }
 }

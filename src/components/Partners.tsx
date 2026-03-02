@@ -18,6 +18,12 @@ const partnerLogos = [
   { name: 'Zendesk', img: 'https://cdn.svgporn.com/logos/zendesk-icon.svg' },
 ];
 
+const marqueeRows = [
+  partnerLogos.slice(0, 5),
+  partnerLogos.slice(5, 10),
+  partnerLogos.slice(10, 15),
+];
+
 const Partners = () => {
   return (
     <section id="work" className="partners">
@@ -31,6 +37,26 @@ const Partners = () => {
             <div key={i} className="partners__logo">
               <img src={partner.img} alt={partner.name} className="partners__logo-img" />
               <span className="partners__logo-text">{partner.name}</span>
+            </div>
+          ))}
+        </div>
+        <div className="partners__marquee">
+          {marqueeRows.map((row, rowIndex) => (
+            <div key={rowIndex} className="partners__marquee-row">
+              <div
+                className={`partners__marquee-track ${
+                  rowIndex % 2 === 0
+                    ? 'partners__marquee-track--left'
+                    : 'partners__marquee-track--right'
+                }`}
+              >
+                {[...row, ...row].map((partner, i) => (
+                  <div key={i} className="partners__marquee-logo">
+                    <img src={partner.img} alt={partner.name} className="partners__logo-img" />
+                    <span className="partners__logo-text">{partner.name}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

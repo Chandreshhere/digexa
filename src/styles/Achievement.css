@@ -106,6 +106,15 @@
   color: var(--text-gray);
 }
 
+/* Carousel (hidden on desktop) */
+.achievement__carousel-wrapper {
+  position: relative;
+}
+
+.achievement__carousel-btn {
+  display: none;
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 1024px) {
@@ -142,15 +151,62 @@
   }
 
   .achievement__desc {
+    font-size: 15px;
     margin-bottom: 40px;
   }
 
+  .achievement__carousel-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--green-accent);
+    color: var(--text-dark);
+    font-size: 20px;
+    font-weight: 700;
+    z-index: 5;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .achievement__carousel-btn--left {
+    left: 4px;
+  }
+
+  .achievement__carousel-btn--right {
+    right: 4px;
+  }
+
   .achievement__stats {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     gap: 16px;
   }
 
+  .achievement__stats::-webkit-scrollbar {
+    display: none;
+  }
+
   .achievement__stat {
+    scroll-snap-align: start;
+    min-width: 220px;
+    flex: 0 0 70%;
     padding: 30px 20px;
+    min-height: auto;
+  }
+
+  .achievement__stat:nth-child(odd) {
+    margin-top: 0;
   }
 
   .achievement__stat-number {
@@ -164,25 +220,27 @@
   }
 
   .achievement__inner {
-    padding: 0 12px;
+    padding: 0 16px;
   }
 
   .achievement__title {
-    font-size: 26px;
-  }
-
-  .achievement__stats {
-    flex-direction: column;
-    gap: 16px;
+    font-size: 28px;
   }
 
   .achievement__stat {
-    min-width: 100%;
-    max-width: 100%;
-    min-height: auto;
+    min-width: 200px;
+    flex: 0 0 75%;
   }
 
   .achievement__stat-number {
     font-size: 28px;
+  }
+
+  .achievement__stat-title {
+    font-size: 18px;
+  }
+
+  .achievement__stat-desc {
+    font-size: 13px;
   }
 }

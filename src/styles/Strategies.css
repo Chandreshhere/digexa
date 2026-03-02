@@ -205,11 +205,15 @@
 
 @media (max-width: 480px) {
   .strategies {
-    padding: 28px 12px;
+    padding: 28px 16px;
   }
 
   .strategies__title {
-    font-size: 26px;
+    font-size: 28px;
+  }
+
+  .strategies__desc {
+    font-size: 15px;
   }
 
   .strategies__features {
@@ -221,17 +225,21 @@
     height: 40px;
   }
 
+  .strategies__feature-desc {
+    font-size: 14px;
+  }
+
   .strategies__image {
     height: 220px;
   }
 
   .strategies__stats {
     padding: 24px 30px;
-    left: 12px;
-    width: calc(100% - 24px);
+    left: 16px;
+    width: calc(100% - 32px);
   }
 
   .strategies__bottom-text {
-    font-size: 14px;
+    font-size: 15px;
   }
 }

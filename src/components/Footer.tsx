@@ -14,20 +14,22 @@ const Footer = () => {
           <p className="footer__social-label">Follow Us :</p>
         </div>
 
-        <div className="footer__col">
-          <h4 className="footer__col-title">Navigation</h4>
-          <a href="#" className="footer__col-link">About Us</a>
-          <a href="#" className="footer__col-link">About Us</a>
-          <a href="#" className="footer__col-link">About Us</a>
-          <a href="#" className="footer__col-link">Services</a>
-        </div>
+        <div className="footer__nav-group">
+          <div className="footer__col">
+            <h4 className="footer__col-title">Navigation</h4>
+            <a href="#" className="footer__col-link">About Us</a>
+            <a href="#" className="footer__col-link">About Us</a>
+            <a href="#" className="footer__col-link">About Us</a>
+            <a href="#" className="footer__col-link">Services</a>
+          </div>
 
-        <div className="footer__col">
-          <h4 className="footer__col-title">Quick Link</h4>
-          <a href="#" className="footer__col-link">Pages</a>
-          <a href="#" className="footer__col-link">FAQs</a>
-          <a href="#" className="footer__col-link">Contact</a>
-          <a href="#" className="footer__col-link">Blog</a>
+          <div className="footer__col footer__col--right">
+            <h4 className="footer__col-title">Quick Link</h4>
+            <a href="#" className="footer__col-link">Pages</a>
+            <a href="#" className="footer__col-link">FAQs</a>
+            <a href="#" className="footer__col-link">Contact</a>
+            <a href="#" className="footer__col-link">Blog</a>
+          </div>
         </div>
 
         <div className="footer__col">

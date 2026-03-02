@@ -114,7 +114,7 @@
 
 @media (max-width: 480px) {
   .newsletter {
-    padding: 0 12px 28px;
+    padding: 0 16px 28px;
   }
 
   .newsletter__card {
@@ -122,10 +122,23 @@
   }
 
   .newsletter__title {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .newsletter__desc {
+    font-size: 14px;
+  }
+
+  .newsletter__buttons {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .newsletter__btn--primary,
+  .newsletter__btn--secondary {
+    width: auto;
+    max-width: none;
+    padding: 12px 20px;
     font-size: 13px;
   }
 }

@@ -529,7 +529,7 @@
 /* Mobile */
 @media (max-width: 480px) {
   .hero-section {
-    padding: 20px 12px;
+    padding: 20px 16px;
   }
 
   .hero {
@@ -537,76 +537,79 @@
   }
 
   .hero__badge {
-    font-size: 12px;
+    font-size: 13px;
     padding: 8px 18px;
   }
 
   .hero__title {
-    font-size: 26px;
+    font-size: 28px;
   }
 
   .hero__desc {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .hero__buttons {
-    flex-direction: column;
-    gap: 12px;
+    flex-direction: row;
+    gap: 10px;
   }
 
   .hero__btn {
-    width: 100%;
+    width: auto;
+    height: 38px;
+    padding: 10px 22px;
+    font-size: 12px;
   }
 
   .hero__right {
-    height: 300px;
+    height: 280px;
   }
 
   .hero__card {
-    left: 12px;
-    width: 240px;
-    padding: 20px 14px 16px;
+    left: 16px;
+    width: 220px;
+    padding: 16px 12px 14px;
   }
 
   .hero__card-title {
-    font-size: 14px;
-    margin-bottom: 16px;
+    font-size: 13px;
+    margin-bottom: 12px;
   }
 
   .hero__card-rating {
-    gap: 14px;
-    margin-bottom: 14px;
+    gap: 12px;
+    margin-bottom: 12px;
   }
 
   .hero__card-score {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .hero__card-score-text {
     font-size: 10px;
-    max-width: 110px;
+    max-width: 100px;
   }
 
   .hero__card-clients {
-    gap: 12px;
+    gap: 10px;
   }
 
   .hero__card-client-text {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .hero__card-dot {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
   }
 
   .hero__cta-bottom {
-    width: 180px;
-    height: 30px;
+    width: 160px;
+    height: 28px;
   }
 
   .hero__cta-bottom-text {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .hero__bottom-row {
@@ -614,20 +617,28 @@
   }
 
   .hero__growth-card {
-    padding: 20px;
+    padding: 16px;
   }
 
   .hero__growth-content h3 {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .hero__growth-content p {
-    font-size: 13px;
+    font-size: 14px;
+  }
+
+  .hero__success-card {
+    padding: 20px 16px;
+  }
+
+  .hero__success-card h3 {
+    font-size: 17px;
   }
 
   .hero__success-stats {
     height: auto;
-    padding: 16px 12px;
+    padding: 16px;
   }
 
   .hero__success-stat-number {

@@ -81,6 +81,11 @@
   opacity: 0.85;
 }
 
+/* Marquee (hidden on desktop) */
+.partners__marquee {
+  display: none;
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 1024px) {
@@ -108,9 +113,67 @@
   }
 
   .partners__grid {
-    grid-template-columns: repeat(2, 1fr);
+    display: none;
+  }
+
+  .partners__marquee {
+    display: flex;
+    flex-direction: column;
     gap: 12px;
     margin-bottom: 30px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .partners__marquee::before,
+  .partners__marquee::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .partners__marquee::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  }
+
+  .partners__marquee::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  }
+
+  .partners__marquee-row {
+    overflow: hidden;
+  }
+
+  .partners__marquee-track {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+  }
+
+  .partners__marquee-track--left {
+    animation: partners-scroll-left 18s linear infinite;
+  }
+
+  .partners__marquee-track--right {
+    animation: partners-scroll-right 18s linear infinite;
+  }
+
+  .partners__marquee-logo {
+    background: var(--bg-light);
+    border-radius: 12px;
+    padding: 16px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 140px;
+    flex-shrink: 0;
   }
 }
 
@@ -120,23 +183,41 @@
   }
 
   .partners__inner {
-    padding: 0 12px;
+    padding: 0 16px;
   }
 
   .partners__title {
-    font-size: 26px;
+    font-size: 28px;
   }
 
-  .partners__grid {
-    grid-template-columns: repeat(2, 1fr);
+  .partners__desc {
+    font-size: 15px;
   }
 
-  .partners__logo {
-    padding: 16px 12px;
-    min-height: 56px;
+  .partners__marquee-logo {
+    padding: 12px 12px;
+    min-width: 120px;
   }
 
-  .partners__logo-text {
+  .partners__marquee-logo .partners__logo-text {
     font-size: 12px;
+  }
+}
+
+@keyframes partners-scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes partners-scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }

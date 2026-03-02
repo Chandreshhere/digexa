@@ -180,11 +180,15 @@
   }
 
   .expertise__inner {
-    padding: 0 12px;
+    padding: 0 16px;
   }
 
   .expertise__title {
-    font-size: 26px;
+    font-size: 28px;
+  }
+
+  .expertise__desc {
+    font-size: 15px;
   }
 
   .expertise__card {
@@ -204,5 +208,9 @@
 
   .expertise__card-title {
     font-size: 18px;
+  }
+
+  .expertise__card-desc {
+    font-size: 14px;
   }
 }
