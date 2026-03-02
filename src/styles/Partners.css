@@ -1,0 +1,142 @@
+.partners {
+  min-height: 100vh;
+  padding: 64px 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.partners__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-padding);
+  width: 100%;
+}
+
+.partners__title {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 120%;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+}
+
+.partners__desc {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 160%;
+  color: var(--text-gray);
+  max-width: 550px;
+  margin: 0 auto 50px;
+}
+
+.partners__grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 50px;
+}
+
+.partners__logo {
+  background: var(--bg-light);
+  border-radius: 12px;
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 70px;
+}
+
+.partners__logo-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.partners__logo-text {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-gray);
+}
+
+.partners__cta {
+  display: inline-block;
+  padding: 14px 39px;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-dark);
+  background: var(--green-accent);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.partners__cta:hover {
+  opacity: 0.85;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1024px) {
+  .partners {
+    min-height: auto;
+    padding: 52px 0;
+  }
+
+  .partners__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .partners {
+    padding: 40px 0;
+  }
+
+  .partners__inner {
+    padding: 0 16px;
+  }
+
+  .partners__title {
+    font-size: 30px;
+  }
+
+  .partners__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .partners {
+    padding: 28px 0;
+  }
+
+  .partners__inner {
+    padding: 0 12px;
+  }
+
+  .partners__title {
+    font-size: 26px;
+  }
+
+  .partners__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .partners__logo {
+    padding: 16px 12px;
+    min-height: 56px;
+  }
+
+  .partners__logo-text {
+    font-size: 12px;
+  }
+}

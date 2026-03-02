@@ -1,0 +1,148 @@
+.features {
+  background: #144530;
+  padding: 64px 0;
+  min-height: 516px;
+  display: flex;
+  align-items: center;
+}
+
+.features__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-padding);
+  width: 100%;
+}
+
+.features__badge {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--green-accent);
+  margin-bottom: 20px;
+}
+
+.features__title {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 47px;
+  line-height: 125%;
+  color: var(--white);
+  max-width: 885px;
+  margin-bottom: 60px;
+}
+
+.features__cards {
+  display: flex;
+  gap: 24px;
+}
+
+.features__card {
+  flex: 1;
+  background: var(--white);
+  border-radius: 16px;
+  padding: 40px 30px;
+  position: relative;
+  min-height: 160px;
+}
+
+.features__card-title {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 130%;
+  color: var(--text-dark);
+  max-width: 200px;
+}
+
+.features__card-icon {
+  position: absolute;
+  top: -16px;
+  right: 20px;
+  width: 52px;
+  height: 52px;
+  background: var(--green-accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.features__card-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--green-dark);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1024px) {
+  .features {
+    min-height: auto;
+    padding: 52px 0;
+  }
+
+  .features__cards {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .features__title {
+    font-size: 36px;
+    margin-bottom: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .features {
+    padding: 40px 0;
+  }
+
+  .features__inner {
+    padding: 0 16px;
+  }
+
+  .features__title {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+
+  .features__card {
+    padding: 30px 24px;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .features {
+    padding: 28px 0;
+  }
+
+  .features__inner {
+    padding: 0 12px;
+  }
+
+  .features__title {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .features__card {
+    padding: 24px 20px;
+  }
+
+  .features__card-title {
+    font-size: 16px;
+  }
+
+  .features__card-icon {
+    width: 42px;
+    height: 42px;
+    top: -12px;
+    right: 16px;
+  }
+
+  .features__card-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+}

@@ -1,0 +1,188 @@
+.achievement {
+  min-height: 100vh;
+  padding: 64px 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.achievement__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-padding);
+  width: 100%;
+}
+
+.achievement__badge {
+  display: inline-block;
+  padding: 11px 38px;
+  background: var(--green-accent);
+  border-radius: 30px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--green-text);
+  margin-bottom: 20px;
+}
+
+.achievement__title {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 125%;
+  color: var(--text-dark);
+  max-width: 737px;
+  margin: 0 auto 16px;
+}
+
+.achievement__desc {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 160%;
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto 60px;
+}
+
+.achievement__stats {
+  display: flex;
+  gap: 17px;
+  align-items: flex-start;
+}
+
+.achievement__stat {
+  flex: 1;
+  min-height: 302px;
+  border-radius: 16px;
+  padding: 40px 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.achievement__stat:nth-child(odd) {
+  margin-top: 22px;
+  background: var(--green-accent);
+}
+
+.achievement__stat:nth-child(even) {
+  background: var(--bg-light);
+}
+
+.achievement__stat-number {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 100%;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+}
+
+.achievement__stat-title {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 125%;
+  color: var(--text-dark);
+  margin-top: auto;
+  margin-bottom: 12px;
+}
+
+.achievement__stat:nth-child(odd) .achievement__stat-title,
+.achievement__stat:nth-child(odd) .achievement__stat-desc {
+  text-align: right;
+}
+
+.achievement__stat:nth-child(even) .achievement__stat-number {
+  text-align: right;
+}
+
+.achievement__stat-desc {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 150%;
+  color: var(--text-gray);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1024px) {
+  .achievement {
+    min-height: auto;
+    padding: 52px 0;
+  }
+
+  .achievement__stats {
+    flex-wrap: wrap;
+  }
+
+  .achievement__stat {
+    min-width: calc(50% - 12px);
+    min-height: auto;
+  }
+
+  .achievement__stat:nth-child(odd) {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .achievement {
+    padding: 40px 0;
+  }
+
+  .achievement__inner {
+    padding: 0 16px;
+  }
+
+  .achievement__title {
+    font-size: 30px;
+  }
+
+  .achievement__desc {
+    margin-bottom: 40px;
+  }
+
+  .achievement__stats {
+    gap: 16px;
+  }
+
+  .achievement__stat {
+    padding: 30px 20px;
+  }
+
+  .achievement__stat-number {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .achievement {
+    padding: 28px 0;
+  }
+
+  .achievement__inner {
+    padding: 0 12px;
+  }
+
+  .achievement__title {
+    font-size: 26px;
+  }
+
+  .achievement__stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .achievement__stat {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: auto;
+  }
+
+  .achievement__stat-number {
+    font-size: 28px;
+  }
+}
