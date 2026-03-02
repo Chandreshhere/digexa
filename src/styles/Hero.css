@@ -72,11 +72,23 @@
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  transition: opacity 0.2s;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .hero__btn:hover {
-  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+.hero__btn--primary:hover {
+  box-shadow: 0 6px 20px rgba(168, 250, 0, 0.3);
+}
+
+.hero__btn--secondary:hover {
+  box-shadow: 0 6px 20px rgba(20, 69, 48, 0.25);
+}
+
+.hero__btn:active {
+  transform: translateY(0);
 }
 
 .hero__btn--primary {
@@ -188,6 +200,12 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero__cta-bottom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(168, 250, 0, 0.3);
 }
 
 .hero__cta-bottom-text {
@@ -251,6 +269,12 @@
   font-weight: 700;
   font-size: 14px;
   color: var(--text-dark);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hero__growth-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(168, 250, 0, 0.3);
 }
 
 .hero__success-wrapper {

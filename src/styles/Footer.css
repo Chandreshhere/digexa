@@ -56,7 +56,7 @@
 }
 
 .footer__col--right {
-  text-align: right;
+  text-align: left;
 }
 
 .footer__col-title {
@@ -110,6 +110,90 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+.footer__socials {
+  display: flex;
+  gap: 12px;
+}
+
+.footer__social {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.footer__social:hover {
+  background: rgba(168, 250, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.footer__col-link--btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: inherit;
+  transition: color 0.2s;
+}
+
+.footer__col-link--btn:hover {
+  color: var(--green-accent);
+}
+
+.footer__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 60px;
+  padding-top: 24px;
+}
+
+.footer__bottom-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__copyright {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.footer__bottom-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer__bottom-link {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.2s;
+}
+
+.footer__bottom-link:hover {
+  color: var(--green-accent);
+}
+
+.footer__bottom-link--btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 1024px) {
@@ -151,6 +235,14 @@
   .footer__col {
     min-width: calc(50% - 15px);
   }
+
+  .footer__bottom {
+    margin-top: 40px;
+  }
+
+  .footer__bottom-inner {
+    padding: 0 16px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -183,5 +275,20 @@
 
   .footer__logo {
     margin-bottom: 16px;
+  }
+
+  .footer__bottom {
+    margin-top: 30px;
+  }
+
+  .footer__bottom-inner {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  .footer__brand-desc {
+    margin-bottom: 24px;
   }
 }

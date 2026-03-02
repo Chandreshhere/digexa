@@ -107,6 +107,22 @@
   height: 32px;
   background: var(--green-dark);
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.team__card-social:hover {
+  background: var(--green-accent);
+  transform: translateY(-2px);
+}
+
+.team__card-social:hover svg path,
+.team__card-social:hover svg rect,
+.team__card-social:hover svg circle {
+  fill: var(--green-dark);
+  stroke: var(--green-dark);
 }
 
 .team__card-name {

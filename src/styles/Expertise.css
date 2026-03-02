@@ -50,7 +50,13 @@
   border-radius: 15px;
   box-shadow: 0px 4px 36.6px -1px #00000038;
   padding: 40px 30px;
-  height: 311px;
+  height: auto;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+}
+
+.expertise__card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 12px 48px -4px rgba(0, 0, 0, 0.22);
 }
 
 .expertise__card:first-child {
@@ -95,6 +101,24 @@
   font-size: 14px;
   line-height: 160%;
   color: var(--text-gray);
+  margin-bottom: 20px;
+}
+
+.expertise__card-btn {
+  display: inline-block;
+  padding: 10px 24px;
+  background: var(--green-accent);
+  border-radius: 6px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--green-dark);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.expertise__card-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(168, 250, 0, 0.3);
 }
 
 /* ===== RESPONSIVE ===== */

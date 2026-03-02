@@ -1,7 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import '../styles/Header.css';
 
-const Header = () => {
+interface HeaderProps {
+  onGetStarted: () => void;
+}
+
+const Header = ({ onGetStarted }: HeaderProps) => {
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
@@ -35,7 +39,7 @@ const Header = () => {
   return (
     <header className={`header${hidden ? ' header--hidden' : ''}${menuOpen ? ' header--menu-open' : ''}`}>
       <div className="header__inner">
-        <div className="header__logo">Digexa</div>
+        <div className="header__logo">BeyondEdge</div>
         <div className="header__right">
           <nav className={`header__nav${menuOpen ? ' header__nav--open' : ''}`}>
             <a href="#home" className="header__nav-link" onClick={() => setMenuOpen(false)}>Home</a>
@@ -43,9 +47,9 @@ const Header = () => {
             <a href="#services" className="header__nav-link" onClick={() => setMenuOpen(false)}>Services</a>
             <a href="#work" className="header__nav-link" onClick={() => setMenuOpen(false)}>Work</a>
             <a href="#contact" className="header__nav-link" onClick={() => setMenuOpen(false)}>Contact</a>
-            <button className="header__cta header__cta--mobile" onClick={() => setMenuOpen(false)}>Get Started</button>
+            <button className="header__cta header__cta--mobile" onClick={() => { setMenuOpen(false); onGetStarted(); }}>Get Started</button>
           </nav>
-          <button className="header__cta header__cta--desktop">Get Started</button>
+          <button className="header__cta header__cta--desktop" onClick={onGetStarted}>Get Started</button>
           <button
             className={`header__hamburger${menuOpen ? ' header__hamburger--active' : ''}`}
             aria-label="Menu"

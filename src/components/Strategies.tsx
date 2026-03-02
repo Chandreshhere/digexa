@@ -1,18 +1,21 @@
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import '../styles/Strategies.css';
 
 const Strategies = () => {
+  const ref = useScrollReveal();
+
   return (
-    <section id="services" className="strategies">
+    <section id="services" className="strategies" ref={ref}>
       <div className="strategies__content">
         <div className="strategies__left">
-          <span className="strategies__badge">Services</span>
-          <h2 className="strategies__title">
+          <span className="strategies__badge reveal">Services</span>
+          <h2 className="strategies__title reveal reveal-delay-1">
             Tailored Strategies for Maximum Business Growth
           </h2>
-          <p className="strategies__desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+          <p className="strategies__desc reveal reveal-delay-2">
+            We combine deep industry knowledge with data-driven insights to craft strategies that don't just look good on paper — they deliver real, scalable results.
           </p>
-          <div className="strategies__features">
+          <div className="strategies__features reveal reveal-delay-2">
             <div className="strategies__feature">
               <div className="strategies__feature-icon">
                 <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,9 +24,9 @@ const Strategies = () => {
                 </svg>
               </div>
               <div>
-                <div className="strategies__feature-title">Driven Strategies</div>
+                <div className="strategies__feature-title">Research-Driven Strategies</div>
                 <div className="strategies__feature-desc">
-                  Lorem ipsum dolor sit amet, con sectetur adipiscing elit ,
+                  Every campaign starts with deep market analysis and competitor research to find your edge.
                 </div>
               </div>
             </div>
@@ -35,18 +38,18 @@ const Strategies = () => {
                 </svg>
               </div>
               <div>
-                <div className="strategies__feature-title">Digital Solution</div>
+                <div className="strategies__feature-title">End-to-End Digital Solutions</div>
                 <div className="strategies__feature-desc">
-                  Lorem ipsum dolor sit amet, con sectetur adipiscing elit ,
+                  From marketing funnels to app development — everything your business needs under one roof.
                 </div>
               </div>
             </div>
           </div>
-          <p className="strategies__bottom-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+          <p className="strategies__bottom-text reveal reveal-delay-3">
+            Our holistic approach ensures that every touchpoint in your digital presence works together to drive growth, engagement, and lasting customer relationships.
           </p>
         </div>
-        <div className="strategies__right">
+        <div className="strategies__right reveal reveal-delay-2">
           <img
             src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=446&fit=crop"
             alt="Team Strategy Session"
@@ -54,16 +57,16 @@ const Strategies = () => {
           />
           <div className="strategies__stats">
             <div className="strategies__stat">
-              <div className="strategies__stat-number">453+</div>
-              <div className="strategies__stat-label">Creating impactful</div>
+              <div className="strategies__stat-number">500+</div>
+              <div className="strategies__stat-label">Projects delivered</div>
             </div>
             <div className="strategies__stat">
-              <div className="strategies__stat-number">453+</div>
-              <div className="strategies__stat-label">Creating impactful</div>
+              <div className="strategies__stat-number">40+</div>
+              <div className="strategies__stat-label">Team members</div>
             </div>
             <div className="strategies__stat">
-              <div className="strategies__stat-number">453+</div>
-              <div className="strategies__stat-label">Creating impactful</div>
+              <div className="strategies__stat-number">8+</div>
+              <div className="strategies__stat-label">Years experience</div>
             </div>
           </div>
         </div>

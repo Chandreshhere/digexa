@@ -1,17 +1,25 @@
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import '../styles/Newsletter.css';
 
-const Newsletter = () => {
+interface NewsletterProps {
+  onSubscribe: () => void;
+  onContact: () => void;
+}
+
+const Newsletter = ({ onSubscribe, onContact }: NewsletterProps) => {
+  const ref = useScrollReveal();
+
   return (
-    <section className="newsletter">
-      <div className="newsletter__card">
+    <section id="contact" className="newsletter" ref={ref}>
+      <div className="newsletter__card reveal">
         <div className="newsletter__content">
-          <h2 className="newsletter__title">Subscribe Our Newsletter .</h2>
+          <h2 className="newsletter__title">Subscribe to Our Newsletter</h2>
           <p className="newsletter__desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua
+            Stay ahead of the curve with weekly insights on digital strategy, marketing trends, and growth tips from our expert team.
           </p>
           <div className="newsletter__buttons">
-            <button className="newsletter__btn--primary">Subscribe Now</button>
-            <button className="newsletter__btn--secondary">Contact Us</button>
+            <button className="newsletter__btn--primary" onClick={onSubscribe}>Subscribe Now</button>
+            <button className="newsletter__btn--secondary" onClick={onContact}>Contact Us</button>
           </div>
         </div>
       </div>

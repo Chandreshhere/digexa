@@ -1,3 +1,4 @@
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import '../styles/Partners.css';
 
 const partnerLogos = [
@@ -24,15 +25,21 @@ const marqueeRows = [
   partnerLogos.slice(10, 15),
 ];
 
-const Partners = () => {
+interface PartnersProps {
+  onViewServices: () => void;
+}
+
+const Partners = ({ onViewServices }: PartnersProps) => {
+  const ref = useScrollReveal();
+
   return (
-    <section id="work" className="partners">
+    <section id="work" className="partners" ref={ref}>
       <div className="partners__inner">
-        <h2 className="partners__title">Our Trusted Partners & Global Affiliates</h2>
-        <p className="partners__desc">
+        <h2 className="partners__title reveal">Our Trusted Partners & Global Affiliates</h2>
+        <p className="partners__desc reveal reveal-delay-1">
           Collaboration is at the heart of what we do. We've teamed up with industry leaders and innovative tech giants to deliver world-class results for our clients.
         </p>
-        <div className="partners__grid">
+        <div className="partners__grid reveal reveal-delay-2">
           {partnerLogos.map((partner, i) => (
             <div key={i} className="partners__logo">
               <img src={partner.img} alt={partner.name} className="partners__logo-img" />
@@ -50,7 +57,7 @@ const Partners = () => {
                     : 'partners__marquee-track--right'
                 }`}
               >
-                {[...row, ...row].map((partner, i) => (
+                {[...row, ...row, ...row, ...row].map((partner, i) => (
                   <div key={i} className="partners__marquee-logo">
                     <img src={partner.img} alt={partner.name} className="partners__logo-img" />
                     <span className="partners__logo-text">{partner.name}</span>
@@ -60,7 +67,7 @@ const Partners = () => {
             </div>
           ))}
         </div>
-        <button className="partners__cta">View All Case Studies</button>
+        <button className="partners__cta reveal reveal-delay-3" onClick={onViewServices}>View Our Services</button>
       </div>
     </section>
   );
