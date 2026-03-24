@@ -55,7 +55,7 @@ const Newsletter = ({ onSubscribe, onContact }: NewsletterProps) => {
         <div className="newsletter__content">
           <h2 className="newsletter__title">Subscribe Our Newsletter .</h2>
           <p className="newsletter__desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua
+            Stay ahead of the curve with BeyondEdge insights on web development, AI automation, and digital marketing strategies delivered straight to your inbox
           </p>
           <div className="newsletter__buttons">
             <button className="newsletter__btn--primary" onClick={onSubscribe}>Subscribe Now</button>

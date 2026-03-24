@@ -6,6 +6,7 @@ import '../styles/Header.css';
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [connectOpen, setConnectOpen] = useState(false);
   const navigate = useNavigate();
   const pillRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -135,6 +136,17 @@ const Header = () => {
     <>
       {menuOpen && <div className="nav-backdrop" onClick={closeMenu} />}
 
+      {/* Green Marquee Ticker — above header */}
+      <div className={`nav-ticker${hidden ? ' nav-ticker--hidden' : ''}`}>
+        <div className="nav-ticker__track">
+          {[...Array(16)].map((_, i) => (
+            <span key={i} className="nav-ticker__item">
+              NEW: DIGITAL GROWTH SERVICES <span className="nav-ticker__star">✦</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
       <div className={`nav-pill-wrap${hidden ? ' nav-pill-wrap--hidden' : ''}`} ref={wrapRef}>
         <div className="nav-pill" ref={pillRef}>
           <div className="nav-pill__bg" />
@@ -156,8 +168,7 @@ const Header = () => {
             </div>
 
             <div className="nav-pill__buttons">
-              <button className="nav-pill__btn nav-pill__btn--login" onClick={() => { if (menuOpen) handleNav('/contact'); else { navigate('/contact'); window.scrollTo(0, 0); } }}>Login</button>
-              <button className="nav-pill__btn nav-pill__btn--join" onClick={() => { if (menuOpen) handleNav('/contact'); else { navigate('/contact'); window.scrollTo(0, 0); } }}>Join</button>
+              <button className="nav-pill__btn nav-pill__btn--connect" onClick={() => setConnectOpen(true)}>Connect</button>
             </div>
           </div>
 
@@ -206,6 +217,29 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      {/* Connect Form Overlay */}
+      {connectOpen && (
+        <>
+          <div className="connect-backdrop" onClick={() => setConnectOpen(false)} />
+          <div className="connect-form">
+            <button className="connect-form__close" onClick={() => setConnectOpen(false)}>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5L15 15M15 5L5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+            </button>
+            <h2 className="connect-form__title">Let's Connect</h2>
+            <p className="connect-form__desc">Tell us about your project and we'll get back within 24 hours.</p>
+            <form className="connect-form__form" onSubmit={(e) => { e.preventDefault(); setConnectOpen(false); }}>
+              <div className="connect-form__row">
+                <input type="text" placeholder="Your Name" required className="connect-form__input" />
+                <input type="email" placeholder="Email Address" required className="connect-form__input" />
+              </div>
+              <input type="text" placeholder="Company (optional)" className="connect-form__input" />
+              <textarea placeholder="How can we help?" rows={4} required className="connect-form__textarea" />
+              <button type="submit" className="connect-form__submit">Send Message</button>
+            </form>
+          </div>
+        </>
+      )}
     </>
   );
 };

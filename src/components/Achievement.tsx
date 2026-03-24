@@ -6,10 +6,10 @@ import '../styles/Achievement.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { number: 472, suffix: '+', title: 'Projects Completed', desc: 'Lorem ipsum dolor sit amet , consectetur adipiscing' },
-  { number: 472, suffix: '+', title: 'Strong Client Relationships', desc: 'Lorem ipsum dolor sit amet , consectetur adipiscing' },
-  { number: 472, suffix: '+', title: 'Expertise Across Multiple Channels', desc: 'Lorem ipsum dolor sit amet , consectetur adipiscing' },
-  { number: 472, suffix: '+', title: 'Strong Client Relationships', desc: 'Lorem ipsum dolor sit amet , consectetur adipiscing' },
+  { number: 472, suffix: '+', title: 'Projects Completed', desc: 'Delivering web, AI, and marketing solutions worldwide' },
+  { number: 472, suffix: '+', title: 'Strong Client Relationships', desc: 'Trusted partnerships built on transparency and results' },
+  { number: 472, suffix: '+', title: 'Expertise Across Multiple Channels', desc: 'From brand strategy to education consultancy at scale' },
+  { number: 472, suffix: '+', title: 'Strong Client Relationships', desc: 'Long-term collaborations spanning 12 countries globally' },
 ];
 
 const Achievement = () => {
@@ -87,7 +87,7 @@ const Achievement = () => {
         <span className="achievement__badge">Achievement</span>
         <h2 className="achievement__title">Proven Success in Driving Business Growth</h2>
         <p className="achievement__desc">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam
+          With over 500 projects completed across 12 countries, BeyondEdge has a proven track record of delivering measurable growth through digital innovation and strategy
         </p>
         <div className="achievement__carousel-wrapper">
           <button className="achievement__carousel-btn achievement__carousel-btn--left" onClick={() => scroll('left')} aria-label="Previous">&#8249;</button>

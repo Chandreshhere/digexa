@@ -86,7 +86,7 @@ const Team = ({ onReadMore }: TeamProps) => {
           </div>
           <div className="team__header-right">
             <p className="team__desc">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+              Our multidisciplinary team of strategists, developers, and creatives brings decades of combined experience across web development, AI automation, and brand strategy to every project.
             </p>
             <button className="team__read-more" onClick={onReadMore}>Read More</button>
           </div>

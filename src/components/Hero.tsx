@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const showcaseCards = [
   { title: 'E-Commerce Growth Strategy', image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=350&fit=crop' },
-  { title: 'AI Customer Support', image: 'https://images.unsplash.com/photo-1531746790095-e5577f030b71?w=500&h=350&fit=crop' },
+  { title: 'AI Customer Support', image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&h=350&fit=crop' },
   { title: '3D Brand Experience', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=350&fit=crop' },
   { title: 'SaaS Product Launch', image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=500&h=350&fit=crop' },
   { title: 'University Platform', image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&h=350&fit=crop' },
@@ -109,17 +109,6 @@ const Hero = () => {
 
   return (
     <div ref={heroRef}>
-      {/* Green Marquee Ticker */}
-      <div className="hero-ticker">
-        <div className="hero-ticker__track">
-          {[...Array(16)].map((_, i) => (
-            <span key={i} className="hero-ticker__item">
-              NEW: DIGITAL GROWTH SERVICES <span className="hero-ticker__star">✦</span>
-            </span>
-          ))}
-        </div>
-      </div>
-
       {/* Main Hero */}
       <section className="hero-section">
         <div className="hero-center">

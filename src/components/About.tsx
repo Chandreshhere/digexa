@@ -10,17 +10,17 @@ const steps = [
   {
     number: '01',
     title: 'Customized Strategies',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+    desc: 'Every business is unique. We craft data-driven strategies tailored to your specific goals, audience, and market position.',
   },
   {
     number: '02',
     title: 'Experienced Team',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+    desc: 'Our team of 40+ specialists brings expertise across marketing, development, AI, and design — all under one roof.',
   },
   {
     number: '03',
-    title: 'Client- Centric Approach',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+    title: 'Client-Centric Approach',
+    desc: 'We treat every project as a partnership. Transparent communication, weekly updates, and measurable results you can track.',
   },
 ];
 
@@ -93,7 +93,7 @@ const About = () => {
         </div>
         <div className="about__top-right">
           <p className="about__top-desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+            We combine marketing, development, and AI under one roof to deliver end-to-end digital solutions. From strategy to execution, we help brands grow faster with measurable, data-driven results across 12+ countries.
           </p>
         </div>
       </div>

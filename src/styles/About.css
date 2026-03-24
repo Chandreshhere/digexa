@@ -1,8 +1,8 @@
 .about {
-  min-height: 100vh;
+  min-height: auto;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 64px var(--page-padding);
+  padding: 20px var(--page-padding) 64px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,8 +49,8 @@
 .about__top-desc {
   font-family: 'Quicksand', sans-serif;
   font-weight: 400;
-  font-size: 15px;
-  line-height: 160%;
+  font-size: 17px;
+  line-height: 170%;
   color: var(--text-gray);
   padding-top: 40px;
 }

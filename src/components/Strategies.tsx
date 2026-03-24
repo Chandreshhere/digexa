@@ -93,7 +93,7 @@ const Strategies = () => {
             Tailored Strategies for Maximum Business Growth
           </h2>
           <p className="strategies__desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+            We craft data-driven digital strategies that align with your business goals, combining AI automation, web development, and marketing expertise to accelerate growth across markets.
           </p>
           <div className="strategies__features">
             <div className="strategies__feature">
@@ -106,7 +106,7 @@ const Strategies = () => {
               <div>
                 <div className="strategies__feature-title">Driven Strategies</div>
                 <div className="strategies__feature-desc">
-                  Lorem ipsum dolor sit amet, con sectetur adipiscing elit ,
+                  Research-backed approaches tailored to your industry and target audience,
                 </div>
               </div>
             </div>
@@ -120,13 +120,13 @@ const Strategies = () => {
               <div>
                 <div className="strategies__feature-title">Digital Solution</div>
                 <div className="strategies__feature-desc">
-                  Lorem ipsum dolor sit amet, con sectetur adipiscing elit ,
+                  End-to-end digital solutions from brand identity to AI-powered automation,
                 </div>
               </div>
             </div>
           </div>
           <p className="strategies__bottom-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+            With 500+ projects delivered across 12 countries, our proven methodologies in web development, digital marketing, and education consultancy consistently drive measurable results
           </p>
         </div>
         <div className="strategies__right">
@@ -138,15 +138,15 @@ const Strategies = () => {
           <div className="strategies__stats">
             <div className="strategies__stat">
               <div className="strategies__stat-number">0</div>
-              <div className="strategies__stat-label">Creating impactful</div>
+              <div className="strategies__stat-label">Projects delivered</div>
             </div>
             <div className="strategies__stat">
               <div className="strategies__stat-number">0</div>
-              <div className="strategies__stat-label">Creating impactful</div>
+              <div className="strategies__stat-label">Countries served</div>
             </div>
             <div className="strategies__stat">
               <div className="strategies__stat-number">0</div>
-              <div className="strategies__stat-label">Creating impactful</div>
+              <div className="strategies__stat-label">Client retention rate</div>
             </div>
           </div>
         </div>
