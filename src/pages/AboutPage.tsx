@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitType from 'split-type';
-import ParallaxImage from '../components/ParallaxImage';
 import '../styles/Pages.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -33,21 +32,6 @@ const productCards = [
   { name: 'Development', desc: 'Custom websites, apps, and platforms built for performance.', color: '#201d1d', textColor: '#f4f4f4' },
   { name: 'AI Solutions', desc: 'Intelligent automation that scales your operations.', color: '#2563EB', textColor: '#f4f4f4' },
   { name: 'Consultancy', desc: 'Strategic guidance for education and startups.', color: '#f4f4f4', textColor: '#201d1d' },
-];
-
-const clientLogos = [
-  { name: 'Google Cloud', logo: 'https://cdn.svgporn.com/logos/google-cloud.svg' },
-  { name: 'AWS', logo: 'https://cdn.svgporn.com/logos/aws.svg' },
-  { name: 'Microsoft', logo: 'https://cdn.svgporn.com/logos/microsoft-icon.svg' },
-  { name: 'Stripe', logo: 'https://cdn.svgporn.com/logos/stripe.svg' },
-  { name: 'Shopify', logo: 'https://cdn.svgporn.com/logos/shopify.svg' },
-  { name: 'Slack', logo: 'https://cdn.svgporn.com/logos/slack-icon.svg' },
-  { name: 'Figma', logo: 'https://cdn.svgporn.com/logos/figma.svg' },
-  { name: 'Vercel', logo: 'https://cdn.svgporn.com/logos/vercel-icon.svg' },
-  { name: 'Meta', logo: 'https://cdn.svgporn.com/logos/meta-icon.svg' },
-  { name: 'Salesforce', logo: 'https://cdn.svgporn.com/logos/salesforce.svg' },
-  { name: 'HubSpot', logo: 'https://cdn.svgporn.com/logos/hubspot.svg' },
-  { name: 'Mailchimp', logo: 'https://cdn.svgporn.com/logos/mailchimp.svg' },
 ];
 
 const AboutPage = () => {
