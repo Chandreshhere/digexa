@@ -1,8 +1,12 @@
-import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { useEffect, useState, useCallback } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 import Header from './components/Header';
 import Hero from './components/Hero';
-import LogoBar from './components/LogoBar';
 import About from './components/About';
 import Services from './components/Services';
 import Features from './components/Features';
@@ -16,294 +20,202 @@ import Footer from './components/Footer';
 import Modal from './components/Modal';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
+import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
+import WorkPage from './pages/WorkPage';
+import ContactPage from './pages/ContactPage';
+import FaqPage from './pages/FaqPage';
+import BlogPage from './pages/BlogPage';
 
-type ModalType = null | 'contact' | 'getStarted' | 'subscribe' | 'webDev' | 'aiService' | 'learnMore' | 'teamInfo' | 'servicesOverview';
+type ModalType = null | 'webdev' | 'ai' | 'team' | 'cases' | 'subscribe' | 'contact';
+
+function HomePage() {
+  const [modal, setModal] = useState<ModalType>(null);
+  const navigate = useNavigate();
+  const close = useCallback(() => setModal(null), []);
+
+  return (
+    <>
+      <Hero />
+      <About />
+      <Services onLearnMore={(type: 'webdev' | 'ai') => setModal(type)} />
+      <Features />
+      <Achievement />
+      <Expertise />
+      <Strategies />
+      <Team onReadMore={() => setModal('team')} />
+      <Partners onViewCases={() => setModal('cases')} />
+      <Newsletter onSubscribe={() => setModal('subscribe')} onContact={() => setModal('contact')} />
+
+      {/* Web Dev Modal */}
+      <Modal isOpen={modal === 'webdev'} onClose={close} title="Web & Mobile Development">
+        <p className="modal-service__desc">
+          High-performance, SEO-optimized websites and custom mobile apps built with React, Next.js, Swift, and Flutter. Every pixel is crafted for speed, accessibility, and maximum conversion.
+        </p>
+        <div className="modal-service__features">
+          {['Custom Web Applications & SPAs', 'Progressive Web Apps (PWA)', 'iOS & Android Native Development', 'E-Commerce Platforms (Shopify, Headless)', 'Performance Optimization & Core Web Vitals'].map((f, i) => (
+            <div key={i} className="modal-service__feature">
+              <span className="modal-service__check">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6L5 9L10 3" stroke="#144530" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </span>
+              {f}
+            </div>
+          ))}
+        </div>
+        <button className="modal-service__cta" onClick={() => { close(); navigate('/services'); window.scrollTo(0, 0); }}>View All Services →</button>
+      </Modal>
+
+      {/* AI Modal */}
+      <Modal isOpen={modal === 'ai'} onClose={close} title="AI & Automation Solutions">
+        <p className="modal-service__desc">
+          Future-proof your operations with custom AI integration. From smart chatbots to full workflow automation, we make technology work for your growth — saving time, reducing costs, and scaling intelligently.
+        </p>
+        <div className="modal-service__features">
+          {['Custom AI Chatbots & Virtual Assistants', 'Workflow & Process Automation', 'Predictive Analytics & Insights', 'Custom Machine Learning Models', 'CRM & Tool Integration'].map((f, i) => (
+            <div key={i} className="modal-service__feature">
+              <span className="modal-service__check">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6L5 9L10 3" stroke="#144530" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </span>
+              {f}
+            </div>
+          ))}
+        </div>
+        <button className="modal-service__cta" onClick={() => { close(); navigate('/services'); window.scrollTo(0, 0); }}>View All Services →</button>
+      </Modal>
+
+      {/* Team Modal */}
+      <Modal isOpen={modal === 'team'} onClose={close} title="Meet Our Team" variant="drawer">
+        <div className="modal-team">
+          {[
+            { name: 'James Mitchell', role: 'Founder & CEO', bio: 'Visionary leader with 10+ years in digital strategy. James founded Digexa to bridge the gap between marketing and technology.', img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=top' },
+            { name: 'Sarah Chen', role: 'Head of Marketing', bio: 'Data-driven marketer specializing in growth strategies. Led campaigns that generated over $50M in client revenue.', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=top' },
+            { name: 'Alex Rivera', role: 'Lead Developer', bio: 'Full-stack engineer passionate about performance and clean code. Architected 100+ web applications and platforms.', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=top' },
+            { name: 'Priya Sharma', role: 'AI & Automation Lead', bio: 'Machine learning specialist building intelligent systems. Previously at Google AI and a Stanford CS graduate.', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop&crop=top' },
+          ].map((m, i) => (
+            <div key={i} className="modal-team__member">
+              <img src={m.img} alt={m.name} className="modal-team__avatar" />
+              <div>
+                <div className="modal-team__name">{m.name}</div>
+                <div className="modal-team__role">{m.role}</div>
+                <div className="modal-team__bio">{m.bio}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button className="modal-service__cta" onClick={() => { close(); navigate('/about'); window.scrollTo(0, 0); }}>About Us →</button>
+      </Modal>
+
+      {/* Case Studies Modal */}
+      <Modal isOpen={modal === 'cases'} onClose={close} title="Our Case Studies" variant="drawer">
+        <div className="modal-services-grid">
+          {[
+            { title: 'Vertex Digital Agency', desc: 'Full-funnel marketing strategy that tripled revenue in 6 months. SEO, paid ads, and content marketing combined.', icon: '📈' },
+            { title: 'EduGlobal University', desc: 'Digital enrollment platform with automated lead nurturing — 60% enrollment boost year over year.', icon: '🎓' },
+            { title: 'NovaTech SaaS', desc: 'End-to-end SaaS platform build from concept to 10K users in 90 days with growth loops.', icon: '🚀' },
+            { title: 'Pulse AI Labs', desc: 'Custom AI chatbots that reduced response times by 70% and cut support costs in half.', icon: '🤖' },
+            { title: 'UrbanCart Commerce', desc: 'Headless e-commerce with personalized recommendations — 250% sales increase.', icon: '🛒' },
+          ].map((c, i) => (
+            <div key={i} className="modal-services-item">
+              <div className="modal-services-item__icon" style={{ fontSize: '22px' }}>{c.icon}</div>
+              <div>
+                <div className="modal-services-item__title">{c.title}</div>
+                <div className="modal-services-item__desc">{c.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button className="modal-service__cta" onClick={() => { close(); navigate('/work'); window.scrollTo(0, 0); }}>View All Work →</button>
+      </Modal>
+
+      {/* Subscribe Modal */}
+      <Modal isOpen={modal === 'subscribe'} onClose={close} title="Subscribe to Our Newsletter">
+        <form className="modal-form" onSubmit={(e) => { e.preventDefault(); close(); }}>
+          <div className="modal-form__row">
+            <div className="modal-form__group">
+              <label className="modal-form__label">First Name</label>
+              <input className="modal-form__input" placeholder="John" />
+            </div>
+            <div className="modal-form__group">
+              <label className="modal-form__label">Last Name</label>
+              <input className="modal-form__input" placeholder="Doe" />
+            </div>
+          </div>
+          <div className="modal-form__group">
+            <label className="modal-form__label">Email Address</label>
+            <input className="modal-form__input" type="email" placeholder="john@example.com" />
+          </div>
+          <div className="modal-form__group">
+            <label className="modal-form__label">What are you interested in?</label>
+            <select className="modal-form__select">
+              <option>Digital Marketing</option>
+              <option>Web Development</option>
+              <option>AI & Automation</option>
+              <option>Brand Strategy</option>
+              <option>All of the above</option>
+            </select>
+          </div>
+          <button type="submit" className="modal-form__submit">Subscribe Now</button>
+        </form>
+      </Modal>
+
+      {/* Contact Modal */}
+      <Modal isOpen={modal === 'contact'} onClose={close} title="Get in Touch">
+        <form className="modal-form" onSubmit={(e) => { e.preventDefault(); close(); }}>
+          <div className="modal-form__row">
+            <div className="modal-form__group">
+              <label className="modal-form__label">Name</label>
+              <input className="modal-form__input" placeholder="Your name" />
+            </div>
+            <div className="modal-form__group">
+              <label className="modal-form__label">Email</label>
+              <input className="modal-form__input" type="email" placeholder="you@company.com" />
+            </div>
+          </div>
+          <div className="modal-form__group">
+            <label className="modal-form__label">Company / Organization</label>
+            <input className="modal-form__input" placeholder="Your company name" />
+          </div>
+          <div className="modal-form__group">
+            <label className="modal-form__label">How can we help?</label>
+            <textarea className="modal-form__textarea" placeholder="Tell us about your project or question..." />
+          </div>
+          <button type="submit" className="modal-form__submit">Send Message</button>
+        </form>
+      </Modal>
+    </>
+  );
+}
 
 function App() {
-  const [activeModal, setActiveModal] = useState<ModalType>(null);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
 
-  const openModal = (modal: ModalType) => {
-    setFormSubmitted(false);
-    setActiveModal(modal);
-  };
-  const closeModal = () => setActiveModal(null);
+    // Sync Lenis with GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormSubmitted(true);
-  };
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+    };
+  }, []);
 
   return (
     <Routes>
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/terms" element={<TermsConditions />} />
-      <Route path="*" element={
-        <>
-          <Header onGetStarted={() => openModal('getStarted')} />
-          <Hero onContact={() => openModal('contact')} onLearnMore={() => openModal('learnMore')} />
-          <LogoBar />
-          <About />
-          <Services onLearnMore={(service: string) => openModal(service === 'web' ? 'webDev' : 'aiService')} />
-          <Features />
-          <Achievement />
-          <Expertise onConsult={() => openModal('contact')} />
-          <Strategies />
-          <Team onReadMore={() => openModal('teamInfo')} />
-          <Partners onViewServices={() => openModal('servicesOverview')} />
-          <Newsletter onSubscribe={() => openModal('subscribe')} onContact={() => openModal('contact')} />
-          <Footer onContact={() => openModal('contact')} />
-
-          {/* Contact / Get Started Modal */}
-      <Modal isOpen={activeModal === 'contact' || activeModal === 'getStarted'} onClose={closeModal} title={activeModal === 'getStarted' ? 'Get Started Today' : 'Contact Us'}>
-        {formSubmitted ? (
-          <div className="modal-form__success">
-            <div className="modal-form__success-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </div>
-            <h3>Message Sent!</h3>
-            <p>Thank you for reaching out. Our team will get back to you within 24 hours.</p>
-          </div>
-        ) : (
-          <form className="modal-form" onSubmit={handleFormSubmit}>
-            <div className="modal-form__row">
-              <div className="modal-form__group">
-                <label className="modal-form__label">First Name</label>
-                <input className="modal-form__input" type="text" placeholder="John" required />
-              </div>
-              <div className="modal-form__group">
-                <label className="modal-form__label">Last Name</label>
-                <input className="modal-form__input" type="text" placeholder="Doe" required />
-              </div>
-            </div>
-            <div className="modal-form__group">
-              <label className="modal-form__label">Email Address</label>
-              <input className="modal-form__input" type="email" placeholder="john@company.com" required />
-            </div>
-            <div className="modal-form__group">
-              <label className="modal-form__label">Service Interested In</label>
-              <select className="modal-form__select" required>
-                <option value="">Select a service</option>
-                <option>Digital Marketing Strategy</option>
-                <option>Web & Mobile Development</option>
-                <option>AI & Automation Solutions</option>
-                <option>SEO & Organic Growth</option>
-                <option>Education Consultancy</option>
-                <option>IT Startup Growth</option>
-              </select>
-            </div>
-            <div className="modal-form__group">
-              <label className="modal-form__label">Message</label>
-              <textarea className="modal-form__textarea" placeholder="Tell us about your project or goals..." required />
-            </div>
-            <button type="submit" className="modal-form__submit">Send Message</button>
-          </form>
-        )}
-      </Modal>
-
-      {/* Subscribe Modal */}
-      <Modal isOpen={activeModal === 'subscribe'} onClose={closeModal} title="Subscribe to Our Newsletter">
-        {formSubmitted ? (
-          <div className="modal-form__success">
-            <div className="modal-form__success-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </div>
-            <h3>You're Subscribed!</h3>
-            <p>Welcome to the BeyondEdge community. You'll receive our latest insights and industry updates.</p>
-          </div>
-        ) : (
-          <form className="modal-form" onSubmit={handleFormSubmit}>
-            <p style={{ fontSize: '14px', color: '#6b7280', lineHeight: 1.6, marginBottom: '4px' }}>
-              Get weekly insights on digital strategy, marketing trends, and growth tips delivered straight to your inbox.
-            </p>
-            <div className="modal-form__group">
-              <label className="modal-form__label">Full Name</label>
-              <input className="modal-form__input" type="text" placeholder="Your name" required />
-            </div>
-            <div className="modal-form__group">
-              <label className="modal-form__label">Email Address</label>
-              <input className="modal-form__input" type="email" placeholder="you@company.com" required />
-            </div>
-            <button type="submit" className="modal-form__submit">Subscribe Now</button>
-          </form>
-        )}
-      </Modal>
-
-      {/* Web Dev Service Modal */}
-      <Modal isOpen={activeModal === 'webDev'} onClose={closeModal} title="Web & Mobile Development">
-        <p className="modal-service__desc">
-          We build high-performance, SEO-optimized websites and custom mobile apps designed for seamless user experiences and maximum conversion rates.
-        </p>
-        <div className="modal-service__features">
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>Custom responsive websites built with modern frameworks</span>
-          </div>
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>Native & cross-platform mobile app development</span>
-          </div>
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>E-commerce platforms with payment integration</span>
-          </div>
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>Performance optimization & technical SEO</span>
-          </div>
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>Ongoing maintenance & support plans</span>
-          </div>
-        </div>
-        <button className="modal-service__cta" onClick={() => { closeModal(); openModal('contact'); }}>Request a Free Consultation</button>
-      </Modal>
-
-      {/* AI Service Modal */}
-      <Modal isOpen={activeModal === 'aiService'} onClose={closeModal} title="AI & Automation Solutions">
-        <p className="modal-service__desc">
-          Future-proof your operations with custom AI integration. We help businesses automate workflows, leverage data intelligence, and scale smarter.
-        </p>
-        <div className="modal-service__features">
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>Custom AI chatbots & virtual assistants</span>
-          </div>
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>Workflow automation & process optimization</span>
-          </div>
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>Data analytics & business intelligence dashboards</span>
-          </div>
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>AI-powered marketing & lead scoring</span>
-          </div>
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>Integration with existing tools & platforms</span>
-          </div>
-        </div>
-        <button className="modal-service__cta" onClick={() => { closeModal(); openModal('contact'); }}>Request a Free Consultation</button>
-      </Modal>
-
-      {/* Team Info Modal */}
-      <Modal isOpen={activeModal === 'teamInfo'} onClose={closeModal} title="Meet Our Team" variant="drawer">
-        <p className="modal-service__desc">
-          Our team is the backbone of BeyondEdge. Each member brings deep expertise in their domain, united by a shared passion for driving digital transformation and delivering exceptional results for our clients.
-        </p>
-        <div className="modal-team">
-          <div className="modal-team__member">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&crop=top" alt="Sarah Mitchell" className="modal-team__avatar" />
-            <div>
-              <h4 className="modal-team__name">Sarah Mitchell</h4>
-              <span className="modal-team__role">Head of Marketing Strategy</span>
-              <p className="modal-team__bio">10+ years crafting data-driven campaigns for Fortune 500 brands. Sarah leads our strategic initiatives and client partnerships.</p>
-            </div>
-          </div>
-          <div className="modal-team__member">
-            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop&crop=top" alt="James Carter" className="modal-team__avatar" />
-            <div>
-              <h4 className="modal-team__name">James Carter</h4>
-              <span className="modal-team__role">Lead Software Engineer</span>
-              <p className="modal-team__bio">Full-stack architect with expertise in React, Node.js, and cloud infrastructure. James has shipped 200+ production applications.</p>
-            </div>
-          </div>
-          <div className="modal-team__member">
-            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&h=80&fit=crop&crop=top" alt="Priya Sharma" className="modal-team__avatar" />
-            <div>
-              <h4 className="modal-team__name">Priya Sharma</h4>
-              <span className="modal-team__role">AI Solutions Architect</span>
-              <p className="modal-team__bio">ML engineer and automation specialist. Priya designs intelligent systems that streamline operations and unlock growth.</p>
-            </div>
-          </div>
-          <div className="modal-team__member">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=top" alt="David Kim" className="modal-team__avatar" />
-            <div>
-              <h4 className="modal-team__name">David Kim</h4>
-              <span className="modal-team__role">SEO & Growth Lead</span>
-              <p className="modal-team__bio">Growth hacker who's driven 3x organic traffic for 50+ brands. David turns search visibility into measurable revenue.</p>
-            </div>
-          </div>
-        </div>
-        <button className="modal-service__cta" onClick={() => { closeModal(); openModal('contact'); }}>Work With Our Team</button>
-      </Modal>
-
-      {/* Services Overview Modal */}
-      <Modal isOpen={activeModal === 'servicesOverview'} onClose={closeModal} title="Our Services" variant="drawer">
-        <p className="modal-service__desc">
-          From strategy to execution, BeyondEdge offers end-to-end digital solutions tailored to accelerate your business growth.
-        </p>
-        <div className="modal-services-grid">
-          <div className="modal-services-item">
-            <div className="modal-services-item__icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="14" rx="2" stroke="#144530" strokeWidth="2"/><line x1="2" y1="8" x2="22" y2="8" stroke="#144530" strokeWidth="1.5"/><line x1="8" y1="22" x2="16" y2="22" stroke="#144530" strokeWidth="2" strokeLinecap="round"/><line x1="12" y1="18" x2="12" y2="22" stroke="#144530" strokeWidth="2"/></svg>
-            </div>
-            <div>
-              <h4 className="modal-services-item__title">Web & Mobile Development</h4>
-              <p className="modal-services-item__desc">Custom responsive websites, native mobile apps, and full-stack e-commerce platforms optimized for speed and conversions.</p>
-            </div>
-          </div>
-          <div className="modal-services-item">
-            <div className="modal-services-item__icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#144530" strokeWidth="2"/><circle cx="12" cy="12" r="3" fill="#A8FA00"/><line x1="12" y1="2" x2="12" y2="4" stroke="#144530" strokeWidth="2" strokeLinecap="round"/><line x1="12" y1="20" x2="12" y2="22" stroke="#144530" strokeWidth="2" strokeLinecap="round"/><line x1="2" y1="12" x2="4" y2="12" stroke="#144530" strokeWidth="2" strokeLinecap="round"/><line x1="20" y1="12" x2="22" y2="12" stroke="#144530" strokeWidth="2" strokeLinecap="round"/></svg>
-            </div>
-            <div>
-              <h4 className="modal-services-item__title">AI & Automation Solutions</h4>
-              <p className="modal-services-item__desc">Smart chatbots, automated workflows, data analytics dashboards, and AI-powered marketing tools for smarter operations.</p>
-            </div>
-          </div>
-          <div className="modal-services-item">
-            <div className="modal-services-item__icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 3h18v14H7l-4 4V3z" stroke="#144530" strokeWidth="2" strokeLinejoin="round"/><line x1="8" y1="8" x2="16" y2="8" stroke="#144530" strokeWidth="2" strokeLinecap="round"/><line x1="8" y1="12" x2="13" y2="12" stroke="#144530" strokeWidth="2" strokeLinecap="round"/></svg>
-            </div>
-            <div>
-              <h4 className="modal-services-item__title">Digital Marketing Strategy</h4>
-              <p className="modal-services-item__desc">SEO, paid ad campaigns, content strategy, social media management, and data-driven brand growth plans.</p>
-            </div>
-          </div>
-          <div className="modal-services-item">
-            <div className="modal-services-item__icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#144530" strokeWidth="2" strokeLinejoin="round"/><path d="M2 17l10 5 10-5" stroke="#144530" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M2 12l10 5 10-5" stroke="#144530" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </div>
-            <div>
-              <h4 className="modal-services-item__title">Education & Startup Consultancy</h4>
-              <p className="modal-services-item__desc">Tailored digital growth programs, mentorship, and strategic guidance for educational institutions and early-stage startups.</p>
-            </div>
-          </div>
-        </div>
-        <button className="modal-service__cta" onClick={() => { closeModal(); openModal('contact'); }}>Get a Free Consultation</button>
-      </Modal>
-
-      {/* Learn More Modal */}
-      <Modal isOpen={activeModal === 'learnMore'} onClose={closeModal} title="About BeyondEdge">
-        <p className="modal-service__desc">
-          BeyondEdge is a full-service digital consultancy that bridges the gap between strategy and execution. We partner with agencies, educational institutions, and tech startups to deliver measurable growth through data-driven marketing, cutting-edge development, and intelligent automation.
-        </p>
-        <div className="modal-service__features">
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>500+ projects delivered across 12 countries</span>
-          </div>
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>Dedicated teams for marketing, development & AI</span>
-          </div>
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>Free consultancy for educational institutions</span>
-          </div>
-          <div className="modal-service__feature">
-            <div className="modal-service__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#144530" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-            <span>Trusted by leading brands and global partners</span>
-          </div>
-        </div>
-        <button className="modal-service__cta" onClick={() => { closeModal(); openModal('contact'); }}>Let's Work Together</button>
-      </Modal>
-        </>
-      } />
+      <Route path="/about" element={<><Header /><AboutPage /><Footer /></>} />
+      <Route path="/services" element={<><Header /><ServicesPage /><Footer /></>} />
+      <Route path="/work" element={<><Header /><WorkPage /><Footer /></>} />
+      <Route path="/contact" element={<><Header /><ContactPage /><Footer /></>} />
+      <Route path="/faq" element={<><Header /><FaqPage /><Footer /></>} />
+      <Route path="/blog" element={<><Header /><BlogPage /><Footer /></>} />
+      <Route path="*" element={<><Header /><HomePage /><Footer /></>} />
     </Routes>
   );
 }

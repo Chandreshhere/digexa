@@ -1,92 +1,133 @@
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import '../styles/Footer.css';
 
-interface FooterProps {
-  onContact: () => void;
-}
+gsap.registerPlugin(ScrollTrigger);
 
-const Footer = ({ onContact }: FooterProps) => {
+const Footer = () => {
   const navigate = useNavigate();
+  const footerRef = useRef<HTMLElement>(null);
+  const bigTextRef = useRef<HTMLDivElement>(null);
+
+  const go = (path: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate(path);
+    window.scrollTo(0, 0);
+  };
+
+  useEffect(() => {
+    if (!bigTextRef.current || !footerRef.current) return;
+
+    // Simple: slide up from below on scroll
+    gsap.fromTo(bigTextRef.current,
+      { yPercent: 50, opacity: 0 },
+      {
+        yPercent: 0,
+        opacity: 1,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: bigTextRef.current,
+          start: 'top 95%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+
+    return () => { ScrollTrigger.getAll().forEach(t => t.kill()); };
+  }, []);
+
   return (
-    <footer className="footer">
-      <div className="footer__inner">
-        <div className="footer__brand">
-          <div className="footer__logo">
-            <span>*</span> BeyondEdge
-          </div>
-          <p className="footer__brand-desc">
-            A full-service digital consultancy helping agencies, institutions, and startups scale through strategic marketing, development, and intelligent automation.
-          </p>
-          <p className="footer__social-label">Follow Us :</p>
-          <div className="footer__socials">
-            <a href="#" className="footer__social" aria-label="LinkedIn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z" fill="#A8FA00"/></svg>
-            </a>
-            <a href="#" className="footer__social" aria-label="Twitter">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" fill="#A8FA00"/></svg>
-            </a>
-            <a href="#" className="footer__social" aria-label="Instagram">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#A8FA00" strokeWidth="2"/><circle cx="12" cy="12" r="5" stroke="#A8FA00" strokeWidth="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#A8FA00"/></svg>
-            </a>
-          </div>
+    <footer className="ft" ref={footerRef}>
+      {/* ===== TOP: Newsletter ===== */}
+      <div className="ft__newsletter">
+        <div className="ft__newsletter-inner">
+          <h3 className="ft__newsletter-title">Subscribe to the BeyondEdge Newsletter</h3>
+          <form className="ft__newsletter-form" onSubmit={(e) => e.preventDefault()}>
+            <input type="text" placeholder="First name" className="ft__newsletter-input" />
+            <input type="email" placeholder="yourname@email.com" className="ft__newsletter-input ft__newsletter-input--wide" />
+            <button type="submit" className="ft__newsletter-btn">Get updates</button>
+          </form>
+          <label className="ft__newsletter-agree">
+            <span className="ft__newsletter-checkbox" />
+            I agree to the <a href="/privacy-policy">Privacy Policy</a>
+          </label>
         </div>
+      </div>
 
-        <div className="footer__nav-group">
-          <div className="footer__col">
-            <h4 className="footer__col-title">Navigation</h4>
-            <a href="#home" className="footer__col-link">Home</a>
-            <a href="#about" className="footer__col-link">About Us</a>
-            <a href="#services" className="footer__col-link">Services</a>
-            <a href="#work" className="footer__col-link">Our Work</a>
+      {/* ===== MIDDLE: Nav columns + social ===== */}
+      <div className="ft__nav">
+        <div className="ft__nav-inner">
+          <div className="ft__nav-col">
+            <h4 className="ft__nav-heading">Pages</h4>
+            <a href="/about" className="ft__nav-link" onClick={go('/about')}>About Us</a>
+            <a href="/services" className="ft__nav-link" onClick={go('/services')}>Services</a>
+            <a href="/work" className="ft__nav-link" onClick={go('/work')}>Collection</a>
+            <a href="/blog" className="ft__nav-link" onClick={go('/blog')}>Blog</a>
+            <a href="/contact" className="ft__nav-link" onClick={go('/contact')}>Contact</a>
+          </div>
+          <div className="ft__nav-col">
+            <h4 className="ft__nav-heading">Community</h4>
+            <a href="/blog" className="ft__nav-link" onClick={go('/blog')}>Updates</a>
+            <a href="/about" className="ft__nav-link" onClick={go('/about')}>About BeyondEdge</a>
+            <a href="/faq" className="ft__nav-link" onClick={go('/faq')}>FAQs</a>
+            <a href="/contact" className="ft__nav-link" onClick={go('/contact')}>Support</a>
+          </div>
+          <div className="ft__nav-col">
+            <h4 className="ft__nav-heading">Resources</h4>
+            <a href="/work" className="ft__nav-link" onClick={go('/work')}>Case Studies</a>
+            <a href="/services" className="ft__nav-link" onClick={go('/services')}>Pricing</a>
+            <a href="/faq" className="ft__nav-link" onClick={go('/faq')}>FAQ</a>
+            <a href="/blog" className="ft__nav-link" onClick={go('/blog')}>
+              Blog <span className="ft__nav-badge">NEW</span>
+            </a>
           </div>
 
-          <div className="footer__col footer__col--right">
-            <h4 className="footer__col-title">Quick Links</h4>
-            <a href="#services" className="footer__col-link">Pricing</a>
-            <a href="#about" className="footer__col-link">FAQs</a>
-            <button className="footer__col-link footer__col-link--btn" onClick={onContact}>Contact</button>
-            <a href="#contact" className="footer__col-link">Newsletter</a>
-          </div>
-        </div>
-
-        <div className="footer__col">
-          <h4 className="footer__col-title">Contact Info</h4>
-          <div className="footer__contact-item">
-            <div className="footer__contact-icon">
-              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 5L10 10L17 5" stroke="#A8FA00" strokeWidth="1.5" strokeLinecap="round"/>
-                <path d="M17 5C17 4 16 3 15 3H5C4 3 3 4 3 5V15C3 16 4 17 5 17H15C16 17 17 16 17 15V5Z" stroke="#A8FA00" strokeWidth="1.5"/>
-              </svg>
+          <div className="ft__nav-actions">
+            <div className="ft__nav-buttons">
+              <button className="ft__btn ft__btn--outline">Login</button>
+              <button className="ft__btn ft__btn--green" onClick={go('/contact')}>Join BeyondEdge</button>
             </div>
-            <span className="footer__contact-text">+1 (555) 123-4567</span>
-          </div>
-          <div className="footer__contact-item">
-            <div className="footer__contact-icon">
-              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="3" y="4" width="14" height="12" rx="2" stroke="#A8FA00" strokeWidth="1.5"/>
-                <path d="M3 7L10 12L17 7" stroke="#A8FA00" strokeWidth="1.5"/>
-              </svg>
+            <div className="ft__socials">
+              <a href="#" className="ft__social" aria-label="LinkedIn">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 7.5V13.5M4.5 4.5V4.51M7.5 13.5V7.5L10.5 13.5V7.5M13.5 7.5V13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </a>
+              <a href="#" className="ft__social" aria-label="Instagram">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="12" height="12" rx="3" stroke="currentColor" strokeWidth="1.5"/><circle cx="9" cy="9" r="2.5" stroke="currentColor" strokeWidth="1.5"/><circle cx="12.5" cy="5.5" r="0.75" fill="currentColor"/></svg>
+              </a>
+              <a href="#" className="ft__social" aria-label="X / Twitter">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3L7.5 9.75L3 15H4.5L8.25 10.5L11.25 15H15L10.5 8.25L15 3H13.5L9.75 7.5L6.75 3H3Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/></svg>
+              </a>
             </div>
-            <span className="footer__contact-text">hello@beyondedge.com</span>
-          </div>
-          <div className="footer__contact-item">
-            <div className="footer__contact-icon">
-              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 2C6.5 2 4 5 4 8C4 12 10 18 10 18C10 18 16 12 16 8C16 5 13.5 2 10 2Z" stroke="#A8FA00" strokeWidth="1.5"/>
-                <circle cx="10" cy="8" r="2.5" stroke="#A8FA00" strokeWidth="1.5"/>
-              </svg>
-            </div>
-            <span className="footer__contact-text">123 Innovation Drive, San Francisco, CA</span>
           </div>
         </div>
       </div>
-      <div className="footer__bottom">
-        <div className="footer__bottom-inner">
-          <p className="footer__copyright">&copy; 2026 BeyondEdge. All rights reserved.</p>
-          <div className="footer__bottom-links">
-            <button className="footer__bottom-link footer__bottom-link--btn" onClick={() => navigate('/privacy-policy')}>Privacy Policy</button>
-            <button className="footer__bottom-link footer__bottom-link--btn" onClick={() => navigate('/terms')}>Terms of Service</button>
+
+      {/* ===== BIG TEXT: BeyondEdge — arched down → straight on scroll ===== */}
+      <div className="ft__bigtext-wrapper">
+        <div className="ft__bigtext" ref={bigTextRef}>
+          {'Beyond'.split('').map((char, i) => (
+            <span key={`b${i}`} className="ft-bigtext__char ft-bigtext__char--green">{char}</span>
+          ))}
+          {'Edge'.split('').map((char, i) => (
+            <span key={`e${i}`} className="ft-bigtext__char ft-bigtext__char--blue">{char}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* ===== BOTTOM BAR ===== */}
+      <div className="ft__bottom">
+        <div className="ft__bottom-inner">
+          <div className="ft__bottom-links">
+            <a href="/privacy-policy" className="ft__bottom-link" onClick={go('/privacy-policy')}>PRIVACY</a>
+            <a href="/terms" className="ft__bottom-link" onClick={go('/terms')}>T&Cs</a>
           </div>
+          <span className="ft__bottom-copy">&copy; 2026 BEYONDEDGE. ALL RIGHTS RESERVED.</span>
+          <span className="ft__bottom-credit">
+            CREATED BY <span className="ft__bottom-credit-name">BEYONDEDGE</span>
+          </span>
         </div>
       </div>
     </footer>

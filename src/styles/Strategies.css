@@ -112,6 +112,8 @@
   flex-shrink: 0;
   position: relative;
   padding-bottom: 20px;
+  overflow: hidden;
+  border-radius: 16px;
 }
 
 .strategies__image {

@@ -43,12 +43,6 @@
   padding: 40px 30px;
   position: relative;
   min-height: 160px;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
-}
-
-.features__card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 .features__card-title {

@@ -32,27 +32,6 @@
   margin: 0 auto 50px;
 }
 
-.partners__grid {
-  display: none;
-}
-
-.partners__logo {
-  background: var(--bg-light);
-  border-radius: 12px;
-  padding: 24px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  min-height: 70px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.partners__logo:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-}
-
 .partners__logo-img {
   width: 28px;
   height: 28px;
@@ -77,16 +56,11 @@
   color: var(--text-dark);
   background: var(--green-accent);
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: opacity 0.2s;
 }
 
 .partners__cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(168, 250, 0, 0.3);
-}
-
-.partners__cta:active {
-  transform: translateY(0);
+  opacity: 0.85;
 }
 
 /* Marquee */

@@ -1,5 +1,10 @@
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SplitType from 'split-type';
 import '../styles/Partners.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const partnerLogos = [
   { name: 'Google Cloud', img: 'https://cdn.svgporn.com/logos/google-cloud.svg' },
@@ -26,27 +31,69 @@ const marqueeRows = [
 ];
 
 interface PartnersProps {
-  onViewServices: () => void;
+  onViewCases?: () => void;
 }
 
-const Partners = ({ onViewServices }: PartnersProps) => {
-  const ref = useScrollReveal();
+const Partners = ({ onViewCases }: PartnersProps) => {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const splits: SplitType[] = [];
+    const ctx = gsap.context(() => {
+      // Title — word by word with blur
+      const titleEl = sectionRef.current!.querySelector('.partners__title') as HTMLElement;
+      if (titleEl) {
+        const split = new SplitType(titleEl, { types: 'words' });
+        splits.push(split);
+        if (split.words) {
+          gsap.fromTo(split.words,
+            { opacity: 0, y: 25, filter: 'blur(6px)' },
+            { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, stagger: 0.04, ease: 'power3.out',
+              scrollTrigger: { trigger: titleEl, start: 'top 82%' } }
+          );
+        }
+      }
+
+      // Desc
+      gsap.fromTo('.partners__desc',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.2,
+          scrollTrigger: { trigger: '.partners__desc', start: 'top 85%' } }
+      );
+
+      // Marquee rows — staggered fade in from sides
+      gsap.fromTo('.partners__marquee-row',
+        { opacity: 0, x: (_i: number, el: Element) => {
+          const idx = Array.from(el.parentElement!.children).indexOf(el);
+          return idx % 2 === 0 ? -60 : 60;
+        }},
+        { opacity: 1, x: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+          scrollTrigger: { trigger: '.partners__marquee', start: 'top 80%' } }
+      );
+
+      // CTA button
+      gsap.fromTo('.partners__cta',
+        { y: 20, opacity: 0, scale: 0.9 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)', delay: 0.5,
+          scrollTrigger: { trigger: '.partners__cta', start: 'top 90%' } }
+      );
+    }, sectionRef);
+
+    return () => {
+      splits.forEach(s => s.revert());
+      ctx.revert();
+    };
+  }, []);
 
   return (
-    <section id="work" className="partners" ref={ref}>
+    <section id="work" className="partners" ref={sectionRef}>
       <div className="partners__inner">
-        <h2 className="partners__title reveal">Our Trusted Partners & Global Affiliates</h2>
-        <p className="partners__desc reveal reveal-delay-1">
+        <h2 className="partners__title">Our Trusted Partners & Global Affiliates</h2>
+        <p className="partners__desc">
           Collaboration is at the heart of what we do. We've teamed up with industry leaders and innovative tech giants to deliver world-class results for our clients.
         </p>
-        <div className="partners__grid reveal reveal-delay-2">
-          {partnerLogos.map((partner, i) => (
-            <div key={i} className="partners__logo">
-              <img src={partner.img} alt={partner.name} className="partners__logo-img" />
-              <span className="partners__logo-text">{partner.name}</span>
-            </div>
-          ))}
-        </div>
         <div className="partners__marquee">
           {marqueeRows.map((row, rowIndex) => (
             <div key={rowIndex} className="partners__marquee-row">
@@ -67,7 +114,7 @@ const Partners = ({ onViewServices }: PartnersProps) => {
             </div>
           ))}
         </div>
-        <button className="partners__cta reveal reveal-delay-3" onClick={onViewServices}>View Our Services</button>
+        <button className="partners__cta" onClick={onViewCases}>View All Case Studies</button>
       </div>
     </section>
   );

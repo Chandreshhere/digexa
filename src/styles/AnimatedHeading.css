@@ -1,0 +1,10 @@
+.animated-heading [class^="line-"] {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  display: block;
+  overflow: hidden;
+}
+.animated-heading [class^="line-inner-"] {
+  position: relative;
+  display: block;
+  will-change: transform;
+}

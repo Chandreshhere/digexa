@@ -59,16 +59,11 @@
   font-weight: 700;
   font-size: 14px;
   color: var(--text-dark);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: opacity 0.2s;
 }
 
 .newsletter__btn--primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(168, 250, 0, 0.3);
-}
-
-.newsletter__btn--primary:active {
-  transform: translateY(0);
+  opacity: 0.85;
 }
 
 .newsletter__btn--secondary {
@@ -85,15 +80,6 @@
 
 .newsletter__btn--secondary:hover {
   background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-}
-
-.newsletter__btn--secondary:active {
-  transform: translateY(0);
-}
-
-.newsletter__btn--secondary {
-  transition: background 0.2s, transform 0.25s ease;
 }
 
 /* ===== RESPONSIVE ===== */

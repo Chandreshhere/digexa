@@ -1,45 +1,105 @@
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SplitType from 'split-type';
 import '../styles/About.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const steps = [
   {
     number: '01',
     title: 'Customized Strategies',
-    desc: 'Every business is unique. We craft tailored marketing and development plans that align with your specific goals and industry.',
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
   },
   {
     number: '02',
     title: 'Experienced Team',
-    desc: 'Our specialists bring years of expertise in digital marketing, software development, and AI to deliver measurable outcomes.',
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
   },
   {
     number: '03',
-    title: 'Client-Centric Approach',
-    desc: 'We prioritize transparency, communication, and results — treating your growth as our own mission from day one.',
+    title: 'Client- Centric Approach',
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
   },
 ];
 
 const About = () => {
-  const ref = useScrollReveal();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Badge slide in
+      gsap.fromTo('.about__badge',
+        { x: -60, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: '.about__badge', start: 'top 85%' } }
+      );
+
+      // Title — split chars, reveal with stagger
+      const titleEl = sectionRef.current!.querySelector('.about__title') as HTMLElement;
+      if (titleEl) {
+        const split = new SplitType(titleEl, { types: 'words' });
+        if (split.words) {
+          gsap.fromTo(split.words,
+            { yPercent: 100, opacity: 0 },
+            { yPercent: 0, opacity: 1, duration: 0.8, stagger: 0.05, ease: 'power3.out',
+              scrollTrigger: { trigger: titleEl, start: 'top 80%' } }
+          );
+        }
+      }
+
+      // Description text fade in
+      gsap.fromTo('.about__top-desc',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+          scrollTrigger: { trigger: '.about__top-desc', start: 'top 85%' } }
+      );
+
+      // Image — parallax + clip reveal
+      gsap.fromTo('.about__image',
+        { clipPath: 'inset(100% 0 0 0)' },
+        { clipPath: 'inset(0% 0 0 0)', duration: 1.2, ease: 'power4.inOut',
+          scrollTrigger: { trigger: '.about__image', start: 'top 80%' } }
+      );
+
+      gsap.fromTo('.about__image img',
+        { scale: 1.3 },
+        { scale: 1, duration: 1.4, ease: 'power2.out',
+          scrollTrigger: { trigger: '.about__image', start: 'top 80%' } }
+      );
+
+      // Steps — staggered slide up with number counter
+      gsap.fromTo('.about__step',
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, stagger: 0.2, ease: 'power3.out',
+          scrollTrigger: { trigger: '.about__steps', start: 'top 80%' } }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="about" className="about" ref={ref}>
-      <span className="about__badge reveal">About Us</span>
-      <div className="about__top reveal">
+    <section id="about" className="about" ref={sectionRef}>
+      <span className="about__badge">About Us</span>
+      <div className="about__top">
         <div className="about__top-left">
           <h2 className="about__title">
-            Maximize Your Growth with Our Digital Expertise
+            Maximize Your Growth with Our Digital Marketing
           </h2>
         </div>
         <div className="about__top-right">
           <p className="about__top-desc">
-            BeyondEdge brings together marketing strategy, cutting-edge development, and AI-driven solutions to help businesses scale faster and smarter in the digital era.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
           </p>
         </div>
       </div>
 
       <div className="about__content">
-        <div className="about__image reveal">
+        <div className="about__image">
           <img
             src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=580&h=500&fit=crop"
             alt="Team analyzing data"
@@ -47,7 +107,7 @@ const About = () => {
         </div>
         <div className="about__steps">
           {steps.map((step, i) => (
-            <div key={i} className={`about__step reveal reveal-delay-${i + 1}`}>
+            <div key={i} className="about__step">
               <div className="about__step-number">{step.number}</div>
               <div className="about__step-content">
                 <h4>{step.title}</h4>
