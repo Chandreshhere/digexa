@@ -20,6 +20,11 @@
   justify-content: center;
   padding: 12px 20px;
   pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-pill-wrap--hidden {
+  transform: translateY(-120%);
 }
 
 .nav-pill {

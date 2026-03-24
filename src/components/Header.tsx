@@ -1,15 +1,30 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import '../styles/Header.css';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const navigate = useNavigate();
   const pillRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (menuOpen) return; // don't hide while menu is open
+      const y = window.scrollY;
+      const down = y > lastScrollY.current && y > 80;
+      if (down !== hidden) setHidden(down);
+      lastScrollY.current = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [hidden, menuOpen]);
 
   const openMenu = useCallback(() => {
     if (isAnimating.current) return;
@@ -120,7 +135,7 @@ const Header = () => {
     <>
       {menuOpen && <div className="nav-backdrop" onClick={closeMenu} />}
 
-      <div className="nav-pill-wrap">
+      <div className={`nav-pill-wrap${hidden ? ' nav-pill-wrap--hidden' : ''}`} ref={wrapRef}>
         <div className="nav-pill" ref={pillRef}>
           <div className="nav-pill__bg" />
           <div className="nav-pill__outline" />
